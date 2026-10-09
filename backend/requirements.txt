@@ -1,0 +1,18 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.32,<1.0
+pydantic>=2.9,<3.0
+pydantic-settings>=2.6,<3.0
+# Pinned below 2.1 on purpose: 2.1 made the Cython extensions mandatory
+# (bare `from ._util_cy import anon_map`), and Windows Smart App Control blocks
+# unsigned .pyd files, which makes the whole backend fail to import. 2.0.x
+# guards that import and falls back to pure Python.
+sqlalchemy>=2.0,<2.1
+python-multipart>=0.0.12
+httpx>=0.27
+python-dotenv>=1.0
+pypdf>=5.1
+pillow>=10.4
+
+# --- test / dev ---
+pytest>=8.3
+pytest-asyncio>=0.24

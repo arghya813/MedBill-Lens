@@ -1,0 +1,63 @@
+# --- Secrets and local configuration --------------------------------------
+# Never commit real API keys or local overrides.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# --- Node -----------------------------------------------------------------
+node_modules/
+.pnpm-store/
+*.tsbuildinfo
+
+# --- Build output ---------------------------------------------------------
+frontend/dist/
+frontend/dev-dist/
+
+# --- Runtime data ---------------------------------------------------------
+# Sample documents and uploaded files are generated on first run.
+# The benchmark datasets under `backend/data/` ARE source: `demo_benchmarks.json`
+# is the synthetic placeholder set, `cghs_benchmarks.json` is the published CGHS
+# tariff built by `backend/scripts/import_cghs.py`, and `cghs_rates.json` is that
+# script's cached copy of the official rate API.
+backend/data/sample_bills/
+backend/data/uploads/
+backend/medbill.db
+backend/medbill.db-journal
+*.sqlite
+*.sqlite3
+
+# Uploaded documents. Must never be committed.
+uploads/
+storage/
+
+# --- Editors and OS --------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# --- Logs ------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-error.log*

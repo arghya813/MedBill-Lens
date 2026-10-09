@@ -1,0 +1,23 @@
+{
+  "name": "medbill-lens",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Run and verify the MedBill Lens backend and frontend together.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "node scripts/dev.mjs --api-only --no-open",
+    "dev:web": "node scripts/dev.mjs --web-only --no-open",
+    "build": "npm --prefix frontend run build",
+    "verify": "npm --prefix frontend run verify",
+    "serve": "node scripts/py.mjs --cwd=root scripts/serve_dist.py",
+    "test": "node scripts/py.mjs -m pytest -q",
+    "test:contract": "node scripts/py.mjs scripts/fullstack_check.py",
+    "test:e2e": "node scripts/py.mjs scripts/e2e_check.py",
+    "test:smoke": "node scripts/py.mjs scripts/smoke.py",
+    "check": "npm run test && npm run test:contract && npm run test:e2e && npm run verify"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

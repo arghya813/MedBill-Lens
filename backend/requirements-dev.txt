@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# Optional: local OCR fallback. Not required - MedBill Lens works without it.
+# pytesseract>=0.3.10

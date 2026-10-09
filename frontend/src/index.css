@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "tnum";
+  }
+
+  /* Keep numeric columns aligned without forcing tabular figures everywhere. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-white;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-ink-200/80 bg-white shadow-sm;
+  }
+
+  .card-pad {
+    @apply p-5 sm:p-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm
+      font-semibold transition duration-150 active:scale-[0.97]
+      disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100;
+  }
+
+  .btn-primary {
+    @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
+  }
+
+  .btn-secondary {
+    @apply btn border border-ink-300 bg-white text-ink-800 hover:bg-ink-50;
+  }
+
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-ink-100 hover:text-ink-900;
+  }
+
+  .btn-danger {
+    @apply btn border border-rose-300 bg-white text-rose-700 hover:bg-rose-50;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-ink-800;
+  }
+
+  .field-input {
+    @apply block w-full rounded-lg border border-ink-300 bg-white px-3 py-2 text-sm
+      text-ink-900 placeholder:text-ink-400 focus:border-brand-500;
+  }
+
+  .field-hint {
+    @apply mt-1 text-xs text-ink-500;
+  }
+
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs
+      font-medium ring-1 ring-inset transition duration-150;
+  }
+
+  .link {
+    @apply font-medium text-brand-700 underline underline-offset-2 transition-colors
+      duration-150 hover:text-brand-800;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded bg-ink-200/70;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+   Kept as plain CSS below the @layer blocks so Tailwind's purge cannot drop
+   it, and all of it collapses to nothing under prefers-reduced-motion.
+   --------------------------------------------------------------------------- */
+
+@keyframes mbl-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mbl-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mbl-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mbl-slide-left {
+  from {
+    opacity: 0;
+    transform: translate3d(14px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mbl-shimmer {
+  from {
+    background-position: -180% 0;
+  }
+  to {
+    background-position: 180% 0;
+  }
+}
+
+@keyframes mbl-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes mbl-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgb(var(--mbl-ring-rgb, 79 70 229) / 0.28);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgb(var(--mbl-ring-rgb, 79 70 229) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(var(--mbl-ring-rgb, 79 70 229) / 0);
+  }
+}
+
+/* Entrance animations ------------------------------------------------------ */
+
+.anim-rise {
+  animation: mbl-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-fade {
+  animation: mbl-fade 0.4s ease-out both;
+}
+
+.anim-pop {
+  animation: mbl-pop 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-slide-left {
+  animation: mbl-slide-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/*
+ * Staggering without extra DOM: each direct child animates in sequence.
+ * Capped at 12 so a long list never waits seconds before the last item.
+ */
+.stagger > * {
+  animation: mbl-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 55ms; }
+.stagger > *:nth-child(3) { animation-delay: 110ms; }
+.stagger > *:nth-child(4) { animation-delay: 165ms; }
+.stagger > *:nth-child(5) { animation-delay: 220ms; }
+.stagger > *:nth-child(6) { animation-delay: 275ms; }
+.stagger > *:nth-child(7) { animation-delay: 330ms; }
+.stagger > *:nth-child(8) { animation-delay: 385ms; }
+.stagger > *:nth-child(9) { animation-delay: 440ms; }
+.stagger > *:nth-child(10) { animation-delay: 495ms; }
+.stagger > *:nth-child(11) { animation-delay: 550ms; }
+.stagger > *:nth-child(n + 12) { animation-delay: 600ms; }
+
+/* Feedback ----------------------------------------------------------------- */
+
+/* Buttons and pills acknowledge the press instead of snapping. */
+.pressable {
+  transition:
+    transform 0.14s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.pressable:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Cards lift a little on hover, but only where a pointer is actually present. */
+@media (hover: hover) {
+  .card-lift {
+    transition:
+      transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-2px);
+    border-color: rgb(199 210 254);
+    box-shadow:
+      0 10px 24px -12px rgb(15 23 42 / 0.25),
+      0 2px 6px -2px rgb(15 23 42 / 0.08);
+  }
+}
+
+/* Nav underline that slides between items. */
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: -0.35rem;
+  height: 2px;
+  border-radius: 9999px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-underline:hover::after,
+.nav-underline[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* Underline that wipes in from the left on hover, for inline text links. */
+.link-wipe {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1.5px;
+  transition: background-size 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-wipe:hover {
+  background-size: 100% 1.5px;
+}
+
+/* Loading ------------------------------------------------------------------ */
+
+/* Sweeping highlight reads as "working" better than a flat grey pulse. */
+.skeleton-sheen {
+  background-image: linear-gradient(
+    90deg,
+    rgb(226 232 240 / 0.75) 0%,
+    rgb(241 245 249 / 0.95) 50%,
+    rgb(226 232 240 / 0.75) 100%
+  );
+  background-size: 180% 100%;
+  animation: mbl-shimmer 1.4s linear infinite;
+}
+
+.anim-ring {
+  animation: mbl-ring 1.6s ease-out infinite;
+}
+
+/* Determinate progress fill. */
+.progress-fill {
+  transform-origin: left center;
+  animation: mbl-grow-x 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Rows and list items ------------------------------------------------------ */
+
+.hover-row {
+  transition: background-color 0.14s ease;
+}
+
+@media (hover: hover) {
+  .hover-row:hover {
+    background-color: rgb(248 250 252);
+  }
+}
+
+/* Table rows expanding in place. */
+.anim-expand {
+  animation: mbl-rise 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Respect the OS setting. Everything above collapses to an instant state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-lift:hover,
+  .pressable:active:not(:disabled) {
+    transform: none;
+  }
+}
